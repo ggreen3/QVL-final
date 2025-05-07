@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Queensland Valuers Limited</title>
+  <link rel="icon" type="image/png" href="https://via.placeholder.com/32?text=QVL" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2216%22 fill=%22%2326A69A%22/%3E%3Ctext x=%225%22 y=%2222%22 font-family=%22Lora, serif%22 font-size=%2220%22 font-weight=%22700%22 fill=%22%23fff%22%3EQVL%3C/text%3E%3C/svg%3E';">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal-primary: #26A69A;
+      --black: #000000;
+      --gray-800: #2d2d2d;
+      --gray-700: #3a3a3a;
+      --gray-600: #4a4a4a;
+      --gray-400: #B0B0B0;
+      --gray-300: #D8D8D8;
+      --gray-200: #e5e5e5;
+      --white: #ffffff;
+      --secondary-accent: #D4A017;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, .nav-links a {
+      font-family: 'Lora', serif;
+    }
+
+    body {
+      background-color: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    nav {
+      background-color: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-container h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .nav-container h1:hover {
+      color: var(--teal-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--gray-600);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-primary);
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: var(--gray-600);
+      cursor: pointer;
+    }
+
+    .nav-links.mobile {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: var(--white);
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.mobile.active {
+      display: flex;
+    }
+
+    .nav-links.mobile a {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+    }
+
+    .intro-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      padding: 6rem 1rem;
+      color: var(--white);
+    }
+
+    .intro-section h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .intro-section p {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .search-bar {
+      background-color: var(--white);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .search-bar input,
+    .search-bar select {
+      padding: 0.75rem;
+      background-color: var(--gray-200);
+      border: none;
+      border-radius: 0.5rem;
+      color: var(--black);
+      font-size: 1rem;
+      flex: 1;
+      min-width: 150px;
+      outline: none;
+      transition: box-shadow 0.3s;
+    }
+
+    .search-bar input:focus,
+    .search-bar select:focus {
+      box-shadow: 0 0 0 2px var(--teal-primary);
+    }
+
+    .search-bar button {
+      padding: 0.75rem 1.5rem;
+      background-color: var(--teal-primary);
+      color: var(--white);
+      font-weight: 600;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .search-bar button:hover {
+      background-color: #1e7d73;
+    }
+
+    .section {
+      margin: 3rem 0;
+    }
+
+    .section h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .service-grid,
+    .property-grid,
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card,
+    .property-card,
+    .admin-card {
+      background-color: var(--white);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .service-card:hover,
+    .property-card:hover,
+    .admin-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-carousel {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      display: flex;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .image-carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+
+    .image-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .carousel-nav button {
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: var(--white);
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .carousel-nav button:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .service-card .content,
+    .property-card .content,
+    .admin-card .content {
+      padding: 1.5rem;
+    }
+
+    .service-card h3,
+    .property-card h3,
+    .admin-card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p,
+    .property-card p,
+    .admin-card p {
+      color: var(--gray-600);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .property-card .price,
+    .admin-card .price {
+      color: var(--black);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .property-card .cta-buttons,
+    .admin-card .cta-buttons {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .property-card .cta-buttons a,
+    .admin-card .cta-buttons button {
+      flex: 1;
+      padding: 0.5rem;
+      background-color: var(--teal-primary);
+      color: var(--white);
+      text-align: center;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .property-card .cta-buttons a:nth-child(2),
+    .admin-card .cta-buttons button:nth-child(2) {
+      background-color: var(--secondary-accent);
+    }
+
+    .property-card .cta-buttons a:hover,
+    .admin-card .cta-buttons button:hover {
+      background-color: #1e7d73;
+    }
+
+    .property-card .cta-buttons a:nth-child(2):hover,
+    .admin-card .cta-buttons button:nth-child(2):hover {
+      background-color: #b88e14;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background-color: var(--white);
+      border-radius: 0.75rem;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .modal-content .image-carousel {
+      height: 400px;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content p {
+      color: var(--gray-600);
+      margin-bottom: 0.75rem;
+    }
+
+    .modal-content .price {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .modal-content .book-btn {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: var(--teal-primary);
+      color: var(--white);
+      font-weight: 600;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-content .book-btn:nth-child(2) {
+      background-color: var(--secondary-accent);
+    }
+
+    .modal-content .book-btn:hover {
+      background-color: #1e7d73;
+    }
+
+    .modal-content .book-btn:nth-child(2):hover {
+      background-color: #b88e14;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--gray-600);
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      line-height: 1;
+    }
+
+    .contact-section,
+    .about-section,
+    .admin-section {
+      background-color: var(--white);
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .about-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      margin: 1rem 0;
+    }
+
+    .contact-grid,
+    .admin-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .contact-grid h3,
+    .admin-form h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .contact-grid p,
+    .admin-form p {
+      color: var(--gray-600);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-grid input,
+    .contact-grid textarea,
+    .admin-form input,
+    .admin-form select,
+    .admin-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: var(--gray-200);
+      border: none;
+      border-radius: 0.5rem;
+      color: var(--black);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      outline: none;
+      transition: box-shadow 0.3s;
+    }
+
+    .contact-grid input:focus,
+    .contact-grid textarea:focus,
+    .admin-form input:focus,
+    .admin-form select:focus,
+    .admin-form textarea:focus {
+      box-shadow: 0 0 0 2px var(--teal-primary);
+    }
+
+    .contact-grid textarea,
+    .admin-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-grid button,
+    .admin-form button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: var(--teal-primary);
+      color: var(--white);
+      font-weight: 600;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .admin-form .update-btn {
+      background-color: var(--secondary-accent);
+    }
+
+    .contact-grid button:hover,
+    .admin-form button:hover {
+      background-color: #1e7d73;
+    }
+
+    .admin-form .update-btn:hover {
+      background-color: #b88e14;
+    }
+
+    .compliance-section {
+      background-color: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 1rem;
+      text-align: center;
+      color: var(--gray-600);
+    }
+
+    .compliance-section p {
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      background-color: var(--white);
+      padding: 3rem 1rem;
+      color: var(--gray-600);
+      font-size: 0.95rem;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-column h4 {
+      font-family: 'Lora', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--teal-primary);
+      margin-bottom: 1rem;
+    }
+
+    .footer-column p,
+    .footer-column li {
+      color: var(--gray-600);
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column a {
+      color: var(--gray-600);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: var(--secondary-accent);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .footer-bottom p {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-bottom .affiliations span::after {
+      content: ' | ';
+      color: var(--gray-400);
+      margin: 0 0.5rem;
+    }
+
+    .footer-bottom .affiliations span:last-child::after {
+      content: '';
+    }
+
+    .loader {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 4px solid var(--gray-200);
+      border-top: 4px solid var(--teal-primary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid,
+      .about-content,
+      .admin-form {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .search-bar {
+        flex-direction: column;
+      }
+
+      .service-grid,
+      .property-grid,
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-image {
+        height: 200px;
+      }
+
+      .intro-section h1 {
+        font-size: 2.5rem;
+      }
+
+      .intro-section p {
+        font-size: 1.2rem;
+      }
+
+      .modal-content {
+        padding: 1rem;
+      }
+
+      .modal-content .image-carousel {
+        height: 300px;
+      }
+
+      .close-btn {
+        font-size: 2.5rem;
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-container h1 {
+        font-size: 1.5rem;
+      }
+
+      .hamburger {
+        font-size: 1.5rem;
+      }
+
+      .search-bar input,
+      .search-bar select {
+        min-width: 100%;
+      }
+
+      .service-card .content,
+      .property-card .content,
+      .admin-card .content {
+        padding: 1rem;
+      }
+
+      .modal-content h3 {
+        font-size: 1.5rem;
+      }
+
+      .modal-content .price {
+        font-size: 1.2rem;
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <h1 onclick="showPage('home')">Queensland Valuers Limited</h1>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+      <div class="nav-links">
+        <a href="#" onclick="showPage('home')" aria-label="Home page">Home</a>
+        <a href="#" onclick="showPage('about')" aria-label="About us page">About Us</a>
+        <a href="#" onclick="showPage('services')" aria-label="Services page">Services</a>
+        <a href="#" onclick="showPage('properties')" aria-label="Properties page">Properties</a>
+        <a href="#" onclick="showPage('contact')" aria-label="Contact page">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="home-page" class="container">
+    <div class="intro-section">
+      <h1>Queensland Valuers Limited</h1>
+      <p>Your Concern is Our Priority</p>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="search-location" placeholder="Location (e.g., Kilimani)" aria-label="Search by location">
+      <select id="search-type" aria-label="Select property type">
+        <option value="">Property Type</option>
+        <option value="residential">Residential</option>
+        <option value="commercial">Commercial</option>
+        <option value="land">Land</option>
+      </select>
+      <input type="number" id="search-price" placeholder="Max Price (KSh)" aria-label="Maximum price">
+      <button onclick="searchProperties()" aria-label="Search properties">Search</button>
+      <div id="search-loader" class="loader"></div>
+    </div>
+    <div class="section">
+      <h2>Featured Properties</h2>
+      <div class="property-grid" id="property-grid"></div>
+    </div>
+  </div>
+
+  <div id="services-page" class="container" style="display: none;">
+    <div class="section">
+      <h2>Our Services</h2>
+      <div class="service-grid">
+        <div class="service-card fade-in">
+          <div class="content">
+            <h3>Property Valuation</h3>
+            <p>Our expert valuers provide precise valuations for land, homes, and commercial properties, tailored for sales, loans, insurance, or audits.</p>
+            <p>We use global standards (RICS Red Book + IVS) to ensure accuracy and trust.</p>
+          </div>
+        </div>
+        <div class="service-card fade-in">
+          <div class="content">
+            <h3>Real Estate Management</h3>
+            <p>We manage your residential, office, or retail properties with care and precision, handling maintenance and utilities seamlessly.</p>
+            <p>Our local teams and smart systems deliver stress-free ownership.</p>
+          </div>
+        </div>
+        <div class="service-card fade-in">
+          <div class="content">
+            <h3>Property Research</h3>
+            <p>Gain clear market insights with our data-driven analysis of rent trends, development potential, and sector forecasts.</p>
+            <p>Trusted by landlords, developers, and investors across Kenya.</p>
+          </div>
+        </div>
+        <div class="service-card fade-in">
+          <div class="content">
+            <h3>Site & Space Acquisition</h3>
+            <p>We guide you through finding and securing the perfect plot or unit, verifying legal status, and negotiating the best terms.</p>
+            <p>Comprehensive support for individuals and businesses.</p>
+          </div>
+        </div>
+        <div class="service-card fade-in">
+          <div class="content">
+            <h3>Letting & Sales</h3>
+            <p>Let, lease, or sell your home, office, warehouse, or retail space with confidence.</p>
+            <p>Our decisions are guided by tenant demand and location insights.</p>
+          </div>
+        </div>
+        <div class="service-card fade-in">
+          <div class="content">
+            <h3>Construction & Hospitality Consulting</h3>
+            <p>From project oversight to cost control, we support your construction and hotel/resort ventures with strategic expertise.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="properties-page" class="container" style="display: none;">
+    <div class="section">
+      <h2>Property Listings</h2>
+      <div class="property-grid" id="property-grid-all"></div>
+    </div>
+  </div>
+
+  <div id="about-page" class="container" style="display: none;">
+    <div class="section about-section">
+      <h2>About QVL</h2>
+      <div class="about-content">
+        <div>
+          <h3>Who We Are</h3>
+          <p>Founded in 2022 and based in Kilimani, Nairobi, Queensland Valuers Limited is your trusted real estate consultancy. Our team of licensed valuers, surveyors, and property managers delivers solutions with local insight and global standards.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="QVL Office" class="about-image">
+        <div>
+          <h3>What Sets Us Apart</h3>
+          <p>- Licensed under Kenya’s Valuers and Estate Agents Acts<br>
+             - Proud members of ISK, VRB, and EARB<br>
+             - Serving all of Kenya with a regional focus<br>
+             - Adhering to RICS and IVSC global standards<br>
+             - Client-first approach with tailored, experience-driven solutions</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2" alt="Property Valuation" class="about-image">
+        <div>
+          <h3>Our Vision</h3>
+          <p>We aim to be East Africa’s leading partner for professional real estate services.</p>
+          <p><strong>Our Motto:</strong> “Your Concern is Our Priority.”</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="contact-page" class="container" style="display: none;">
+    <div class="section contact-section">
+      <h2>Contact Us</h2>
+      <div class="contact-grid">
+        <div>
+          <h3>Ready to Connect?</h3>
+          <p>Have questions or need expert property advice? Our team is here to assist you.</p>
+          <p><strong>Elizabeth Wakabari Wanjohi:</strong> +254 726 790 685</p>
+          <p><strong>Milkah Muthoni Kariuki:</strong> +254 726 849 665</p>
+          <p><strong>Email:</strong> info@queenslandvaluers.co.ke</p>
+          <p><strong>Address:</strong> Timau Plaza, 2nd Floor, Argwings Kodhek Road, Kilimani, Nairobi</p>
+          <p><strong>P.O. Box:</strong> 38790, Nairobi GPO</p>
+        </div>
+        <div>
+          <input type="text" id="contact-name" placeholder="Your Name" aria-label="Your name">
+          <input type="email" id="contact-email" placeholder="Your Email" aria-label="Your email">
+          <textarea id="contact-message" placeholder="Your Message" aria-label="Your message"></textarea>
+          <button onclick="sendContactEmail()" aria-label="Send contact message">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="admin-page" class="container" style="display: none;">
+    <div class="section admin-section">
+      <h2>Admin Dashboard</h2>
+      <div class="admin-form">
+        <div>
+          <h3>Add/Edit Property</h3>
+          <input type="text" id="admin-title" placeholder="Property Title" aria-label="Property title">
+          <input type="text" id="admin-location" placeholder="Location" aria-label="Property location">
+          <input type="number" id="admin-price" placeholder="Price (KSh)" aria-label="Property price">
+          <select id="admin-type" aria-label="Property type">
+            <option value="">Select Type</option>
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+            <option value="land">Land</option>
+          </select>
+          <textarea id="admin-details" placeholder="Details" aria-label="Property details"></textarea>
+          <textarea id="admin-services" placeholder="Services" aria-label="Property services"></textarea>
+          <input type="file" id="admin-images" accept="image/*" multiple aria-label="Upload up to 5 images">
+          <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <button id="add-btn" onclick="addProperty()" aria-label="Add new property">Add New Property</button>
+            <button id="update-btn" class="update-btn" onclick="updateProperty()" aria-label="Update property" style="display: none;">Update Property</button>
+          </div>
+        </div>
+      </div>
+      <div id="admin-loader" class="loader"></div>
+      <div class="section">
+        <h2>Manage Properties</h2>
+        <div class="admin-grid" id="admin-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="property-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()" aria-label="Close modal">✕</button>
+      <div id="modal-images" class="image-carousel">
+        <div class="carousel-nav">
+          <button onclick="scrollCarousel('modal-images', -1)" aria-label="Previous image"><</button>
+          <button onclick="scrollCarousel('modal-images', 1)" aria-label="Next image">></button>
+        </div>
+      </div>
+      <h3 id="modal-title"></h3>
+      <p id="modal-location"></p>
+      <p id="modal-price" class="price"></p>
+      <p id="modal-details"></p>
+      <p id="modal-services"></p>
+      <a id="book-phone-btn" class="book-btn" href="#" aria-label="Book via phone">Book via Phone</a>
+      <a id="book-email-btn" class="book-btn" href="#" aria-label="Book via email">Book via Email</a>
+    </div>
+  </div>
+
+  <div class="compliance-section">
+    <p>Our services meet RICS and IVS global standards.</p>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>QVL</h4>
+        <p>Queensland Valuers Limited is a Kenyan-based professional real estate consultancy founded in 2022. Our team consists of licensed valuers, surveyors, and property managers.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('services')">Property Valuation</a></li>
+          <li><a href="#" onclick="showPage('services')">Real Estate Management</a></li>
+          <li><a href="#" onclick="showPage('services')">Property Research</a></li>
+          <li><a href="#" onclick="showPage('services')">Site Acquisition</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Property Types</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('properties')">Residential</a></li>
+          <li><a href="#" onclick="showPage('properties')">Commercial</a></li>
+          <li><a href="#" onclick="showPage('properties')">Industrial</a></li>
+          <li><a href="#" onclick="showPage('properties')">Land</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Contact Us</h4>
+        <p>Timau Plaza, 2nd Floor<br>Argwings Kodhek Road, Kilimani<br>Nairobi, Kenya</p>
+        <p>P.O. Box 38790, Nairobi GPO</p>
+        <p><a href="tel:+254726790685">Elizabeth: +254 726 790 685</a></p>
+        <p><a href="tel:+254726849665">Milkah: +254 726 849 665</a></p>
+        <p><a href="mailto:info@queenslandvaluers.co.ke">info@queenslandvaluers.co.ke</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Licensed by: <span>VRB</span><span>EARB</span><span>ISK</span></p>
+      <p>Affiliated with: <span>FIG</span><span>APSEA</span><span>CASLE</span></p>
+      <p>© 2025 Queensland Valuers Limited. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDYXwP2DQ98OR5GQCv5Za-O5ctAeP1Y7to",
+      authDomain: "qvl1-5ea58.firebaseapp.com",
+      projectId: "qvl1-5ea58",
+      storageBucket: "qvl1-5ea58.firebasestorage.app",
+      messagingSenderId: "374416511963",
+      appId: "1:374416511963:web:2f4a735719a975f44ccdfe",
+      measurementId: "G-62B897D9JX"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const propertiesCollection = db.collection('properties');
+
+    const ADMIN_PASSWORD = 'QVL';
+    let editingPropertyId = null;
+
+    const initialProperties = [
+      {
+        id: 1,
+        title: "2BR Apartment in Kilimani",
+        location: "Kilimani, Nairobi",
+        price: 9500000,
+        type: "residential",
+        details: "Fully verified with a clean title deed",
+        services: "Managed by QVL with regular inspections and utility oversight",
+        images: [
+          "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+          "https://images.unsplash.com/photo-1613490493576-7fde63acd811"
+        ]
+      },
+      {
+        id: 2,
+        title: "Commercial Office in Westlands",
+        location: "Westlands, Nairobi",
+        price: 15000000,
+        type: "commercial",
+        details: "Prime location with high foot traffic",
+        services: "Professionally valued, ready for letting",
+        images: [
+          "https://images.unsplash.com/photo-1486406146925-3b41f0cf4693",
+          "https://images.unsplash.com/photo-14973662105479-4275897d473e",
+          "https://images.unsplash.com/photo-1542744096-0a8a4a7a9a1b"
+        ]
+      },
+      {
+        id: 3,
+        title: "Vacant Land in Karen",
+        location: "Karen, Nairobi",
+        price: 5000000,
+        type: "land",
+        details: "Clean title, perfect for residential development",
+        services: "Valued by QVL with full acquisition support",
+        images: [
+          "https://images.unsplash.com/photo-1590247813695-69534b4574b5",
+          "https://images.unsplash.com/photo-1500382017468-9049fed747ef",
+          "https://images.unsplash.com/photo-1580587771525-78b9f0f89f76"
+        ]
+      },
+      {
+        id: 4,
+        title: "3BR Townhouse in Lavington",
+        location: "Lavington, Nairobi",
+        price: 12000000,
+        type: "residential",
+        details: "Modern design with spacious interiors",
+        services: "QVL-managed with maintenance and security services",
+        images: [
+          "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+          "https://images.unsplash.com/photo-1613490493576-7fde63acd811"
+        ]
+      },
+      {
+        id: 5,
+        title: "Retail Space in CBD",
+        location: "Nairobi CBD",
+        price: 20000000,
+        type: "commercial",
+        details: "High-visibility location ideal for businesses",
+        services: "Valued and managed by QVL for optimal leasing",
+        images: [
+          "https://images.unsplash.com/photo-1486406146925-3b41f0cf4693",
+          "https://images.unsplash.com/photo-14973662105479-4275897d473e",
+          "https://images.unsplash.com/photo-1542744096-0a8a4a7a9a1b"
+        ]
+      },
+      {
+        id: 6,
+        title: "Residential Plot in Runda",
+        location: "Runda, Nairobi",
+        price: 8000000,
+        type: "land",
+        details: "Prime plot in a secure, upscale neighborhood",
+        services: "QVL provides valuation and acquisition support",
+        images: [
+          "https://images.unsplash.com/photo-1590247813695-69534b4574b5",
+          "https://images.unsplash.com/photo-1500382017468-9049fed747ef",
+          "https://images.unsplash.com/photo-1580587771525-78b9f0f89f76"
+        ]
+      }
+    ];
+
+    let properties = [];
+    let filteredProperties = [];
+
+    async function initializeProperties() {
+      const snapshot = await propertiesCollection.get();
+      if (snapshot.empty) {
+        for (const property of initialProperties) {
+          await propertiesCollection.doc(String(property.id)).set(property);
+        }
+      }
+      await fetchProperties();
+    }
+
+    async function fetchProperties() {
+      properties = [];
+      const snapshot = await propertiesCollection.orderBy('id', 'asc').get();
+      snapshot.forEach(doc => {
+        properties.push(doc.data());
+      });
+      filteredProperties = [...properties];
+      renderProperties();
+      renderAdminProperties();
+    }
+
+    async function saveProperty(property) {
+      await propertiesCollection.doc(String(property.id)).set(property);
+      await fetchProperties();
+    }
+
+    async function updatePropertyInFirestore(property) {
+      await propertiesCollection.doc(String(property.id)).update(property);
+      await fetchProperties();
+    }
+
+    async function deletePropertyFromFirestore(id) {
+      await propertiesCollection.doc(String(id)).delete();
+      await fetchProperties();
+    }
+
+    function toggleMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('mobile');
+      navLinks.classList.toggle('active');
+    }
+
+    function scrollCarousel(carouselId, direction) {
+      const carousel = document.getElementById(carouselId);
+      const scrollAmount = carousel.offsetWidth;
+      carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+
+    function openModal(id) {
+      const property = properties.find(p => p.id === id);
+      if (!property) return;
+
+      document.getElementById('modal-title').textContent = property.title;
+      document.getElementById('modal-location').textContent = property.location;
+      document.getElementById('modal-price').textContent = `KSh ${property.price.toLocaleString()}`;
+      document.getElementById('modal-details').textContent = property.details;
+      document.getElementById('modal-services').textContent = property.services;
+      document.getElementById('modal-images').innerHTML = property.images
+        .filter(img => img)
+        .map(img => `<img src="${img}" alt="${property.title}">`)
+        .join('');
+
+      document.getElementById('book-phone-btn').href = `tel:+254726790685`;
+      document.getElementById('book-email-btn').href = `mailto:info@queenslandvaluers.co.ke?subject=Inquiry: ${encodeURIComponent(property.title)}&body=I'm interested in ${encodeURIComponent(property.title)} located in ${encodeURIComponent(property.location)}. Please provide more details.`;
+
+      const modal = document.getElementById('property-modal');
+      modal.style.display = 'flex';
+      modal.focus();
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('property-modal');
+      modal.style.display = 'none';
+    }
+
+    function sendContactEmail() {
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const message = document.getElementById('contact-message').value;
+
+      if (!name || !email || !message) {
+        alert('Please fill all fields');
+        return;
+      }
+
+      const subject = encodeURIComponent('Contact Form Submission');
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
+      window.location.href = `mailto:info@queenslandvaluers.co.ke?subject=${subject}&body=${body}`;
+      alert('Opening your email client...');
+    }
+
+    function promptAdminLogin() {
+      const password = prompt('Enter admin password:');
+      if (password === ADMIN_PASSWORD) {
+        showPage('admin');
+      } else {
+        alert('Incorrect password');
+      }
+    }
+
+    async function addProperty() {
+      const adminLoader = document.getElementById('admin-loader');
+      adminLoader.style.display = 'block';
+
+      const title = document.getElementById('admin-title').value;
+      const location = document.getElementById('admin-location').value;
+      const price = parseInt(document.getElementById('admin-price').value);
+      const type = document.getElementById('admin-type').value;
+      const details = document.getElementById('admin-details').value;
+      const services = document.getElementById('admin-services').value;
+      const imageFiles = document.getElementById('admin-images').files;
+
+      if (!title || !location || !price || !type || !details || !services) {
+        alert('Please fill all fields');
+        adminLoader.style.display = 'none';
+        return;
+      }
+
+      if (imageFiles.length > 5) {
+        alert('You can upload a maximum of 5 images.');
+        adminLoader.style.display = 'none';
+        return;
+      }
+
+      const images = [];
+      const defaultImages = [
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+        "https://images.unsplash.com/photo-1613490493576-7fde63acd811",
+        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde",
+        "https://images.unsplash.com/photo-1600585153490-76fb20a32601"
+      ];
+
+      if (imageFiles.length > 0) {
+        const promises = Array.from(imageFiles).map(file => {
+          return new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              images.push(e.target.result);
+              resolve();
+            };
+            reader.readAsDataURL(file);
+          });
+        });
+        await Promise.all(promises);
+      } else {
+        images.push(...defaultImages.slice(0, 3));
+      }
+
+      const newProperty = {
+        id: properties.length ? Math.max(...properties.map(p => p.id)) + 1 : 1,
+        title,
+        location,
+        price,
+        type,
+        details,
+        services,
+        images
+      };
+
+      await saveProperty(newProperty);
+      resetAdminForm();
+      adminLoader.style.display = 'none';
+      alert('Property added successfully');
+    }
+
+    function editProperty(id) {
+      const adminLoader = document.getElementById('admin-loader');
+      adminLoader.style.display = 'block';
+
+      const property = properties.find(p => p.id === id);
+      if (!property) {
+        adminLoader.style.display = 'none';
+        return;
+      }
+
+      editingPropertyId = id;
+      document.getElementById('admin-title').value = property.title;
+      document.getElementById('admin-location').value = property.location;
+      document.getElementById('admin-price').value = property.price;
+      document.getElementById('admin-type').value = property.type;
+      document.getElementById('admin-details').value = property.details;
+      document.getElementById('admin-services').value = property.services;
+      document.getElementById('add-btn').style.display = 'none';
+      document.getElementById('update-btn').style.display = 'block';
+
+      adminLoader.style.display = 'none';
+    }
+
+    async function updateProperty() {
+      const adminLoader = document.getElementById('admin-loader');
+      adminLoader.style.display = 'block';
+
+      const property = properties.find(p => p.id === editingPropertyId);
+      if (!property) {
+        adminLoader.style.display = 'none';
+        return;
+      }
+
+      const title = document.getElementById('admin-title').value;
+      const location = document.getElementById('admin-location').value;
+      const price = parseInt(document.getElementById('admin-price').value);
+      const type = document.getElementById('admin-type').value;
+      const details = document.getElementById('admin-details').value;
+      const services = document.getElementById('admin-services').value;
+      const imageFiles = document.getElementById('admin-images').files;
+
+      if (!title || !location || !price || !type || !details || !services) {
+        alert('Please fill all fields');
+        adminLoader.style.display = 'none';
+        return;
+      }
+
+      if (imageFiles.length > 5) {
+        alert('You can upload a maximum of 5 images.');
+        adminLoader.style.display = 'none';
+        return;
+      }
+
+      property.title = title;
+      property.location = location;
+      property.price = price;
+      property.type = type;
+      property.details = details;
+      property.services = services;
+
+      if (imageFiles.length > 0) {
+        const images = [];
+        const promises = Array.from(imageFiles).map(file => {
+          return new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              images.push(e.target.result);
+              resolve();
+            };
+            reader.readAsDataURL(file);
+          });
+        });
+        await Promise.all(promises);
+        property.images = images;
+      } else if (property.images.length === 0) {
+        const defaultImages = [
+          "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+          "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+          "https://images.unsplash.com/photo-1613490493576-7fde63acd811",
+          "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde",
+          "https://images.unsplash.com/photo-1600585153490-76fb20a32601"
+        ];
+        property.images = defaultImages.slice(0, 3);
+      }
+
+      await updatePropertyInFirestore(property);
+      resetAdminForm();
+      adminLoader.style.display = 'none';
+      alert('Property updated successfully');
+    }
+
+    async function deleteProperty(id) {
+      const adminLoader = document.getElementById('admin-loader');
+      adminLoader.style.display = 'block';
+
+      if (confirm('Are you sure you want to delete this property?')) {
+        await deletePropertyFromFirestore(id);
+      }
+
+      adminLoader.style.display = 'none';
+    }
+
+    function resetAdminForm() {
+      document.getElementById('admin-title').value = '';
+      document.getElementById('admin-location').value = '';
+      document.getElementById('admin-price').value = '';
+      document.getElementById('admin-type').value = '';
+      document.getElementById('admin-details').value = '';
+      document.getElementById('admin-services').value = '';
+      document.getElementById('admin-images').value = '';
+      document.getElementById('add-btn').style.display = 'block';
+      document.getElementById('update-btn').style.display = 'none';
+      editingPropertyId = null;
+    }
+
+    function renderAdminProperties() {
+      const adminGrid = document.getElementById('admin-grid');
+      adminGrid.innerHTML = '';
+
+      properties.forEach(property => {
+        const card = `
+          <div class="admin-card fade-in" role="button" tabindex="0" aria-label="Manage ${property.title}">
+            <div class="image-carousel" id="carousel-admin-${property.id}">
+              ${property.images.filter(img => img).map(img => `<img src="${img}" alt="${property.title}">`).join('')}
+              <div class="carousel-nav">
+                <button onclick="scrollCarousel('carousel-admin-${property.id}', -1)" aria-label="Previous image"><</button>
+                <button onclick="scrollCarousel('carousel-admin-${property.id}', 1)" aria-label="Next image">></button>
+              </div>
+            </div>
+            <div class="content">
+              <h3>${property.title}</h3>
+              <p>${property.location}</p>
+              <p class="price">KSh ${property.price.toLocaleString()}</p>
+              <p>${property.details}</p>
+              <p>${property.services}</p>
+              <div class="cta-buttons">
+                <button onclick="editProperty(${property.id})" aria-label="Edit property">Edit</button>
+                <button onclick="deleteProperty(${property.id})" aria-label="Delete property">Delete</button>
+              </div>
+            </div>
+          </div>
+        `;
+        adminGrid.innerHTML += card;
+      });
+    }
+
+    function renderProperties() {
+      const propertyGrid = document.getElementById('property-grid');
+      const propertyGridAll = document.getElementById('property-grid-all');
+      propertyGrid.innerHTML = '';
+      propertyGridAll.innerHTML = '';
+
+      const isPropertiesPage = document.getElementById('properties-page').style.display === 'block';
+      const propertiesToRender = isPropertiesPage ? filteredProperties : filteredProperties.slice(0, 3);
+
+      propertiesToRender.forEach(property => {
+        const card = `
+          <div class="property-card fade-in" onclick="openModal(${property.id})" role="button" tabindex="0" aria-label="View ${property.title}">
+            <div class="image-carousel" id="carousel-${property.id}">
+              ${property.images.filter(img => img).map(img => `<img src="${img}" alt="${property.title}">`).join('')}
+              <div class="carousel-nav">
+                <button onclick="scrollCarousel('carousel-${property.id}', -1)" aria-label="Previous image"><</button>
+                <button onclick="scrollCarousel('carousel-${property.id}', 1)" aria-label="Next image">></button>
+              </div>
+            </div>
+            <div class="content">
+              <h3>${property.title}</h3>
+              <p>${property.location}</p>
+              <p class="price">KSh ${property.price.toLocaleString()}</p>
+              <p>${property.details}</p>
+              <p>${property.services}</p>
+              <div class="cta-buttons">
+                <a href="#" onclick="event.stopPropagation(); openModal(${property.id})" aria-label="View details">View Details</a>
+                <a href="mailto:info@queenslandvaluers.co.ke?subject=Valuation Request: ${encodeURIComponent(property.title)}" onclick="event.stopPropagation();" aria-label="Book valuation">Book Valuation</a>
+              </div>
+            </div>
+          </div>
+        `;
+        if (isPropertiesPage) {
+          propertyGridAll.innerHTML += card;
+        } else {
+          propertyGrid.innerHTML += card;
+        }
+      });
+    }
+
+    function searchProperties() {
+      const searchLoader = document.getElementById('search-loader');
+      searchLoader.style.display = 'block';
+
+      const location = document.getElementById('search-location').value.toLowerCase();
+      const type = document.getElementById('search-type').value;
+      const price = document.getElementById('search-price').value;
+
+      filteredProperties = properties.filter(p => {
+        let match = true;
+        if (location && !p.location.toLowerCase().includes(location)) match = false;
+        if (type && p.type !== type) match = false;
+        if (price && p.price > parseInt(price)) match = false;
+        return match;
+      });
+
+      renderProperties();
+      searchLoader.style.display = 'none';
+    }
+
+    function showPage(page) {
+      document.getElementById('home-page').style.display = page === 'home' ? 'block' : 'none';
+      document.getElementById('services-page').style.display = page === 'services' ? 'block' : 'none';
+      document.getElementById('properties-page').style.display = page === 'properties' ? 'block' : 'none';
+      document.getElementById('about-page').style.display = page === 'about' ? 'block' : 'none';
+      document.getElementById('contact-page').style.display = page === 'contact' ? 'block' : 'none';
+      document.getElementById('admin-page').style.display = page === 'admin' ? 'block' : 'none';
+      sessionStorage.setItem('currentPage', page);
+      renderProperties();
+      if (page === 'admin') renderAdminProperties();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        promptAdminLogin();
+      }
+      if (e.key === 'Enter' || e.key === ' ') {
+        const activeElement = document.activeElement;
+        if (activeElement.classList.contains('property-card')) {
+          const id = activeElement.getAttribute('onclick').match(/\d+/)[0];
+          openModal(parseInt(id));
+        }
+      }
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    document.getElementById('property-modal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('property-modal')) {
+        closeModal();
+      }
+    });
+
+    window.addEventListener('load', () => {
+      const savedPage = sessionStorage.getItem('currentPage') || 'home';
+      showPage(savedPage);
+    });
+
+    initializeProperties();
+  </script>
+</body>
+</html>
