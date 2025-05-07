@@ -528,6 +528,58 @@
       background-color: #b88e14;
     }
 
+    .image-upload-container {
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .image-upload {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: var(--gray-200);
+      border: none;
+      border-radius: 0.5rem;
+      color: var(--black);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      outline: none;
+      transition: box-shadow 0.3s;
+    }
+
+    .image-upload:focus {
+      box-shadow: 0 0 0 2px var(--teal-primary);
+    }
+
+    .image-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .image-preview img {
+      max-width: 100px;
+      max-height: 100px;
+      object-fit: cover;
+      border-radius: 0.25rem;
+      border: 1px solid var(--gray-300);
+    }
+
+    .add-image-btn {
+      padding: 0.5rem 1rem;
+      background-color: var(--teal-primary);
+      color: var(--white);
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 0.5rem;
+    }
+
+    .add-image-btn:hover {
+      background-color: #1e7d73;
+    }
+
     .compliance-section {
       background-color: var(--white);
       border-top: 1px solid var(--gray-200);
@@ -890,7 +942,11 @@
           </select>
           <textarea id="admin-details" placeholder="Details" aria-label="Property details"></textarea>
           <textarea id="admin-services" placeholder="Services" aria-label="Property services"></textarea>
-          <input type="file" id="admin-images" accept="image/*" multiple aria-label="Upload up to 5 images">
+          <div class="image-upload-container">
+            <input type="file" id="admin-images-0" class="image-upload" accept="image/*" multiple aria-label="Upload images (up to 5)">
+            <div id="image-preview-0" class="image-preview"></div>
+            <button id="add-image-btn" class="add-image-btn" onclick="addImageInput(event)" aria-label="Add another image input">Add More Images</button>
+          </div>
           <div style="display: flex; gap: 1rem; margin-top: 1rem;">
             <button id="add-btn" onclick="addProperty()" aria-label="Add new property">Add New Property</button>
             <button id="update-btn" class="update-btn" onclick="updateProperty()" aria-label="Update property" style="display: none;">Update Property</button>
@@ -1188,7 +1244,9 @@
       const type = document.getElementById('admin-type').value;
       const details = document.getElementById('admin-details').value;
       const services = document.getElementById('admin-services').value;
-      const imageFiles = document.getElementById('admin-images').files;
+      const imageFiles = Array.from(document.querySelectorAll('.image-upload')).reduce((acc, input) => {
+        return [...acc, ...Array.from(input.files)];
+      }, []);
 
       if (!title || !location || !price || !type || !details || !services) {
         alert('Please fill all fields');
@@ -1212,7 +1270,7 @@
       ];
 
       if (imageFiles.length > 0) {
-        const promises = Array.from(imageFiles).map(file => {
+        const promises = imageFiles.map(file => {
           return new Promise(resolve => {
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -1261,9 +1319,21 @@
       document.getElementById('admin-type').value = property.type;
       document.getElementById('admin-details').value = property.details;
       document.getElementById('admin-services').value = property.services;
+
+      // Reset and populate image inputs
+      const imageInputs = document.querySelectorAll('.image-upload');
+      imageInputs.forEach((input, index) => {
+        if (index === 0) {
+          input.value = '';
+          const preview = document.getElementById(`image-preview-${index}`);
+          preview.innerHTML = property.images.map(img => `<img src="${img}" alt="Preview">`).join('');
+        } else {
+          input.parentElement.remove();
+        }
+      });
+
       document.getElementById('add-btn').style.display = 'none';
       document.getElementById('update-btn').style.display = 'block';
-
       adminLoader.style.display = 'none';
     }
 
@@ -1283,7 +1353,9 @@
       const type = document.getElementById('admin-type').value;
       const details = document.getElementById('admin-details').value;
       const services = document.getElementById('admin-services').value;
-      const imageFiles = document.getElementById('admin-images').files;
+      const imageFiles = Array.from(document.querySelectorAll('.image-upload')).reduce((acc, input) => {
+        return [...acc, ...Array.from(input.files)];
+      }, []);
 
       if (!title || !location || !price || !type || !details || !services) {
         alert('Please fill all fields');
@@ -1306,7 +1378,7 @@
 
       if (imageFiles.length > 0) {
         const images = [];
-        const promises = Array.from(imageFiles).map(file => {
+        const promises = imageFiles.map(file => {
           return new Promise(resolve => {
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -1353,7 +1425,15 @@
       document.getElementById('admin-type').value = '';
       document.getElementById('admin-details').value = '';
       document.getElementById('admin-services').value = '';
-      document.getElementById('admin-images').value = '';
+      const imageInputs = document.querySelectorAll('.image-upload');
+      imageInputs.forEach((input, index) => {
+        if (index === 0) {
+          input.value = '';
+          document.getElementById(`image-preview-${index}`).innerHTML = '';
+        } else {
+          input.parentElement.remove();
+        }
+      });
       document.getElementById('add-btn').style.display = 'block';
       document.getElementById('update-btn').style.display = 'none';
       editingPropertyId = null;
@@ -1462,6 +1542,62 @@
       if (page === 'admin') renderAdminProperties();
     }
 
+    function addImageInput(event) {
+      event.preventDefault();
+      const imageContainers = document.querySelectorAll('.image-upload-container');
+      if (imageContainers.length >= 5) {
+        alert('Maximum of 5 image uploads reached.');
+        return;
+      }
+
+      const container = document.querySelector('.image-upload-container');
+      const index = container.querySelectorAll('.image-upload').length;
+      const newInput = document.createElement('input');
+      newInput.type = 'file';
+      newInput.className = 'image-upload';
+      newInput.id = `admin-images-${index}`;
+      newInput.accept = 'image/*';
+      newInput.multiple = true;
+      newInput.setAttribute('aria-label', `Upload images (up to 5 for input ${index + 1})`);
+      newInput.addEventListener('change', previewImages);
+
+      const newPreview = document.createElement('div');
+      newPreview.id = `image-preview-${index}`;
+      newPreview.className = 'image-preview';
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'image-upload-container';
+      wrapper.appendChild(newInput);
+      wrapper.appendChild(newPreview);
+
+      container.parentNode.insertBefore(wrapper, container.nextSibling);
+    }
+
+    function previewImages(event) {
+      const input = event.target;
+      const previewId = `image-preview-${input.id.split('-')[2]}`;
+      const preview = document.getElementById(previewId);
+      preview.innerHTML = '';
+
+      const files = Array.from(input.files);
+      if (files.length > 5) {
+        alert('You can select a maximum of 5 images per input.');
+        input.value = '';
+        return;
+      }
+
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.alt = 'Preview';
+          preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
     document.addEventListener('keydown', (e) => {
       if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
         e.preventDefault();
@@ -1483,6 +1619,10 @@
       if (e.target === document.getElementById('property-modal')) {
         closeModal();
       }
+    });
+
+    document.querySelectorAll('.image-upload').forEach(input => {
+      input.addEventListener('change', previewImages);
     });
 
     window.addEventListener('load', () => {
